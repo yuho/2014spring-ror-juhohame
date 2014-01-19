@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Brewery.create name:"Hartwall", year:"2000"
+(Brewery.find_by name:"Hartwall").beers.create name:"Karhu", style:"Lager"
