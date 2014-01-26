@@ -7,7 +7,7 @@ class Beer < ActiveRecord::Base
   end
 
   def to_s
-    "#{self.name} by " + Brewery.find_by("#{self.brewery_id}").name
+    "#{self.name} by " + Brewery.find_by(id:"#{self.brewery_id}").name
   end
 end
 
