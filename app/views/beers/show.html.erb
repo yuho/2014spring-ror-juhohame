@@ -15,6 +15,17 @@
   <%= link_to (Brewery.find_by id:@beer.brewery.id).name, brewery_path(@beer.brewery_id) %>
 </p>
 
+<% if @beer.ratings.empty? %>
+  <% count = "no" %>
+  <% avg = "" %>
+<% else %>
+  <% count = Rating.where(beer_id:@beer.id).count %>
+  <% avg = ", average " + @beer.average_rating.to_s %>
+<% end %>
+<p>
+   Has <%=count%> ratings<%=avg%>
+</p>
+
 <%= link_to 'Edit', edit_beer_path(@beer) %> |
 <%= link_to 'Back', beers_path %>
 
