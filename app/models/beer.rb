@@ -3,12 +3,7 @@ class Beer < ActiveRecord::Base
   has_many :ratings
 
   def average_rating
-    avg=0
-    ratings = Rating.where(beer_id:"#{self.id}")
-    ratings.each do |r|
-      avg += r.score.to_f/ratings.count
-    end
-    return avg
+    Rating.where(beer_id:"#{self.id}").pluck("score").inject(:+).to_f/Rating.where(beer_id:"#{self.id}").count
   end
 end
 

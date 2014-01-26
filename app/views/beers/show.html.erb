@@ -16,14 +16,14 @@
 </p>
 
 <% if @beer.ratings.empty? %>
-  <% count = "no" %>
+  <% count = pluralize(0, "rating") %>
   <% avg = "" %>
 <% else %>
-  <% count = Rating.where(beer_id:@beer.id).count %>
+  <% count = pluralize(Rating.where(beer_id:@beer.id).count, "rating") %>
   <% avg = ", average " + @beer.average_rating.to_s %>
 <% end %>
 <p>
-   Has <%=count%> ratings<%=avg%>
+   beer has <%=count%> <%=avg%>
 </p>
 
 <%= link_to 'Edit', edit_beer_path(@beer) %> |
