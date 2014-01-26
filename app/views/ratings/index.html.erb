@@ -6,7 +6,7 @@
 
 <ul>
 	<% @ratings.each do |r| %>
-		<li><%= r %> <%= link_to 'Destroy', r, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+		<li><%= r %> <%= link_to 'Destroy', r, method: :destroy, data: { confirm: 'Are you sure?' } %></li>
 
 	<%end%>
 </ul>
