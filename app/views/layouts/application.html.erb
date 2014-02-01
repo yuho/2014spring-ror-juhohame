@@ -12,10 +12,22 @@
     <%= link_to 'breweries', breweries_path %>
     <%= link_to 'beers', beers_path %>
     <%= link_to 'ratings', ratings_path %>
+    <%= link_to 'users', users_path %>
+
+    <span style="background-color: Black; width:1em; height: 1em; display:inline-block;"></span>
+
+    <% if current_user.nil? %>
+      <%= link_to 'Sign in', signin_path %> OR
+      <%= link_to 'Sign up', signup_path %>
+    <% else %>
+      <%= link_to current_user.username, current_user %>
+      <%= link_to 'rate a bear', new_rating_path %>
+      <%= link_to 'Sign out', signout_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
 
-<% unless session[:user_id].nil? %>
-  <p><%= User.find(session[:user_id]).username %> signed in</p>
+<% unless current_user.nil? %>
+  <p><%= current_user.username %> is signed in</p>
 <% end %>
 
 <%= yield %>
