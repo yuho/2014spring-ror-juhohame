@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
 
+  validates :username, length: {
+    minimum: 3, maximum: 15
+  }
+
 end
