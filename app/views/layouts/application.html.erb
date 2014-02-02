@@ -13,9 +13,7 @@
     <%= link_to 'beers', beers_path %>
     <%= link_to 'ratings', ratings_path %>
     <%= link_to 'users', users_path %>
-
-    <span style="background-color: Black; width:1em; height: 1em; display:inline-block;"></span>
-
+    |
     <% if current_user.nil? %>
       <%= link_to 'Sign in', signin_path %> OR
       <%= link_to 'Sign up', signup_path %>
