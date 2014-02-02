@@ -10,4 +10,7 @@ class Brewery < ActiveRecord::Base
           less_than_or_equal_to: 2014,
           only_integer: true
         }
+
+	validates :year, :inclusion => { :in => proc { 1024..Time.now.year } }
+
 end
