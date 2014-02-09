@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   }
 
   validates :password, format: {
-    with: /([A-Z].*[0-9])|([0-9].*[A-Z])/, message: "must match: /([A-Z].*[0-9])|([0-9].*[A-Z])/"
+    with: /(.*)(([A-Z].*[0-9])|([0-9].*[A-Z]))(.*)/, message: "must match: /([A-Z].*[0-9])|([0-9].*[A-Z])/"
   }
 
 end
