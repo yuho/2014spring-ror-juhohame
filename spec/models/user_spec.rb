@@ -20,6 +20,11 @@ describe User do
 			user = User.create username:"2l"
 			User.should_not have_at_least(1).items
 		end
+
+		it "has the password of only letters" do
+			user = User.create username:"#{uname}", password:"OnLyLeTtErS", password_confirmation:"OnLyLeTtErS"
+			User.should have_at_most(0).items
+		end
 	end
 
 	it "has the username set correctly" do
