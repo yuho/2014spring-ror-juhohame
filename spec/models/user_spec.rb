@@ -1,5 +1,17 @@
 require 'spec_helper'
 
+def bwrs(*scores, user) # bwrs == beer with ratings
+	scores.each do |s|
+		bwr(s,user)
+	end
+end
+
+def bwr(score, user) # bwr == beer with rating
+        b = FactoryGirl.create(:beer)
+        FactoryGirl.create(:rating, score:score, beer:b, user:user)
+        b
+end
+
 describe User do
 	uname = "Peca"
 	pw = "Passwor1d"
@@ -27,9 +39,10 @@ describe User do
 		end
 	end
 
+	let(:user){FactoryGirl.create(:user)}
+
 	it "has the username set correctly" do
-		user = User.new username:"#{uname}"
-		user.username.should == "#{uname}"
+		user.username.should == "Pekka"
 	end
 
 	it "is not saved without a passworld" do
@@ -39,18 +52,37 @@ describe User do
 	end
 
 	it "is saved with a proper passworld" do
-		user = User.create username:"#{uname}", password:"#{pw}", password_confirmation:"#{pw}"
 		expect(user).to be_valid
 		expect(User.count).to eq(1)
 	end
 
 	it "with a proper password and 2 ratings, has the correct average rating" do
-		user = User.create username:"#{uname}", password:"#{pw}", password_confirmation:"#{pw}"
-		r1 = Rating.new score:10
-		r2 = Rating.new score:20
+		r1 = FactoryGirl.create(:rating)
+		r2 = FactoryGirl.create(:rating2)
+		r3 = FactoryGirl.create(:rating2)
 		user.ratings << r1
 		user.ratings << r2
-		expect(user.ratings.count).to eq(2)
-		user.average_rating.should eq(15.0)
+		user.ratings << r3
+		expect(user.ratings.count).to eq(3)
+		user.average_rating.should eq(50.0/3)
+	end
+
+	describe "favorite beer" do
+		it "has method for determining" do
+			user.should respond_to :favorite_beer
+		end
+
+		it "without ratings doesn't have a" do
+			user.favorite_beer.should eq(nil)
+		end
+		it "is the one if it is the only one" do
+			b = bwr(10,user)
+			user.favorite_beer.should eq(b)
+		end
+		it "is the one with highest rating of several rated beers" do
+			bwrs(10,15,9,24,user)
+			best = bwr(25, user)
+			user.favorite_beer.should eq(best)
+		end
 	end
 end

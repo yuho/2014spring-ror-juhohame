@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
     with: /(.*)(([A-Z].*[0-9])|([0-9].*[A-Z]))(.*)/, message: "must match: /([A-Z].*[0-9])|([0-9].*[A-Z])/"
   }
 
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
 end

@@ -6,6 +6,9 @@ gem 'rails', '4.0.2'
 # rspec for testing
 group :test do
   gem 'rspec-rails', '~> 2.14.1'
+  gem 'factory_girl_rails'
+  gem 'launchy'
+  gem 'capybara'
 end
 
 # Use sqlite3 as the database for Active Record
