@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'webmock/rspec'
 
 describe "Places" do
 	it "if none is returned by the API, \"no locations\" is shown on the page" do
