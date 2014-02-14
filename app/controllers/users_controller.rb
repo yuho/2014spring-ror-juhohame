@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if user_params[:username].nil? and @user.update(user_params) and @user == current_user
+      if user_params[:username].nil? and @user == current_user and @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -56,11 +56,11 @@ class UsersController < ApplicationController
   def destroy
     if @user == current_user
       @user.destroy
-      @user.ratings.select{ |r| r.user.nil? }.each{ |r| r.delete }
-      respond_to do |format|
-        format.html { redirect_to users_url }
-        format.json { head :no_content }
-      end
+      session[:user_id] = nil
+    end
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.json { head :no_content }
     end
   end
 

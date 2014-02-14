@@ -1,24 +1,26 @@
 require 'spec_helper'
 
 describe Beer do
-	describe "has name and style" do
-		let(:b){Beer.new name:"Le Beer", style:"Alcoholic"}
-		it "is valid" do
-			b.should be_valid
-		end
-		it "is saved" do
-			b.save
-			Beer.should have_exactly(1).items
-		end
-	end
-	describe "does not have (this) and hence not saved" do
-		it "name" do
-			b = Beer.create style:"Alcoholic"
-			Beer.should have_exactly(0).items
-		end
-		it "style" do
-			b = Beer.create name:"La Birra"
-			Beer.should have_exactly(0).items
-		end
-	end
+  it "is saved when name and style are nonempty" do
+    beer = Beer.create name:"Karhu", style:"Lager"
+
+    expect(beer).to be_valid
+    expect(Beer.count).to eq(1)
+  end
+
+  describe "is not saved" do
+    it "if name missing" do
+      beer = Beer.create style:"Lager"
+
+      expect(beer).not_to be_valid
+      expect(Beer.count).to eq(0)
+    end
+
+    it "if style missing" do
+      beer = Beer.create name:"Karhu"
+
+      expect(beer).not_to be_valid
+      expect(Beer.count).to eq(0)
+    end
+  end
 end

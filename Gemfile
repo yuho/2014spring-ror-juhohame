@@ -1,26 +1,14 @@
 source 'https://rubygems.org'
 
+# execjs
+gem 'therubyracer', platforms: :ruby
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# rspec for testing
-group :test do
-  gem 'rspec-rails', '~> 2.14.1'
-  gem 'factory_girl_rails'
-  gem 'launchy'
-  gem 'capybara'
-end
-
-# Use sqlite3 as the database for Active Record
-# gem 'sqlite3
-
-# Use PostegreSQL
 group :development, :test do
   gem 'sqlite3'
 end
-
-# password
-gem 'bcrypt-ruby'
 
 group :production do
    gem 'pg'
@@ -37,7 +25,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -54,13 +42,20 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+group :development, :test do
+  gem 'rspec-rails', '~> 2.14.1'
+  gem 'byebug'
+end
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov', require: false
+end
+

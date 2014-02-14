@@ -1,12 +1,14 @@
+<p id="notice"><%= notice %></p>
+
 <h1>Listing breweries</h1>
-<p>No. of breweries: <%= "#{@breweries.count}" %></p>
+
+<p> Number of breweries: <%= @breweries.count %> </p> 
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Year</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -27,3 +29,4 @@
 <br>
 
 <%= link_to 'New Brewery', new_brewery_path %>
+

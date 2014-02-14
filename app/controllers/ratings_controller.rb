@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   def index
-    @ratings=Rating.all
+    @ratings = Rating.all
   end
 
   def new
@@ -9,7 +9,7 @@ class RatingsController < ApplicationController
   end
 
   def create
-    @rating = Rating.create params.require(:rating).permit(:score, :beer_id)
+    @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
 
     if @rating.save
       current_user.ratings << @rating
