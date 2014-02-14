@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# HTTP artillery
+gem 'httparty'
+
 # execjs
 gem 'therubyracer', platforms: :ruby
 
