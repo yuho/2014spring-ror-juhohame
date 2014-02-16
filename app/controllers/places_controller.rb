@@ -13,7 +13,7 @@ class PlacesController < ApplicationController
 
 	def show
 		@places = BeermappingApi.places_in(params[:city])
-		@place = @places.find { |p| p.id = params[:id] }
+		@place = @places.find { |p| p.id == params[:id] }
 		@mapurl = BeermappingApi.location(params[:id])
 	end
 
