@@ -21,6 +21,7 @@ Ratebeer::Application.routes.draw do
 
   get 'places', to: 'places#index'
   post 'places', to:'places#search'
+  get 'places/:id', to: 'places#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

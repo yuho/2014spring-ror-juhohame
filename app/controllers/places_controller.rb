@@ -10,5 +10,12 @@ class PlacesController < ApplicationController
 			render :index
 		end
 	end
+
+	def show
+		@places = BeermappingApi.places_in(params[:city])
+		@place = @places.find { |p| p.id = params[:id] }
+		@mapurl = BeermappingApi.location(params[:id])
+	end
+
 end
 

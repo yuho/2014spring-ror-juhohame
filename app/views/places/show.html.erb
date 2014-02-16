@@ -1,0 +1,6 @@
+<h1><%= "#{@place.name}" %></h1>
+<ul>
+	<li><%= "#{@place.street}" %></li>
+	<li><%= "#{@place.zip} #{@place.city}" %></li>
+</ul>
+<iframe src="<%= @mapurl %>" width=400 height=400>
