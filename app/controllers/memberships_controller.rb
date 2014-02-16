@@ -1,3 +1,4 @@
+
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
 
@@ -30,7 +31,7 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+        format.html { redirect_to @membership.beer_club, notice: "Welcome to the club, #{@membership.user.username}!" }
         format.json { render action: 'show', status: :created, location: @membership }
       else
         @clubs = BeerClub.all.reject{ |b| b.members.include? current_user }
