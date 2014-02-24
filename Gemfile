@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+# bootstrap
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
+
+gem 'selenium-webdriver'
 gem 'jquery-turbolinks'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
