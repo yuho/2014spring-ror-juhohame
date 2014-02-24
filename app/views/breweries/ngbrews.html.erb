@@ -1,0 +1,37 @@
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+<script>
+    function LeController($scope, $http) {
+        $http.get('breweries.json').success( function(data, status, headers, config) {
+            $scope.brews = data;
+        });
+
+        $scope.order = 'name';
+
+        $scope.click = function (order){
+            $scope.order = order;
+            console.log(order);
+        }
+
+        $scope.searchText = '';
+    }
+</script>
+
+<h2>Beers</h2>
+
+<div ng-app ng-controller="LeController">
+  search:  <input ng-model="searchText">
+
+  <table>
+    <thead>
+    <th> <a ng-click="click('name')">name</a> </th>
+    <th> <a ng-click="click('year')">year</a> </th>
+    <th> <a ng-click="click('bearcount')">no. of bears</a> </th>
+    </thead>
+    <tr ng-repeat="brew in brews| orderBy:order | filter:searchText">
+      <td>{{brew.name}}</td>
+      <td>{{brew.year}}</td>
+      <td>{{brew.number.ofBeers}}</td>
+    </tr>
+  </table>
+
+</div>
