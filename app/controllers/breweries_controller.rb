@@ -1,3 +1,4 @@
+
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
@@ -7,6 +8,12 @@ class BreweriesController < ApplicationController
   # GET /breweries.json
   def index
     @breweries = Brewery.all
+    order = params[:order] || 'name'
+    #order = 'year'
+    case order
+      when 'name' then @breweries.sort_by!{|b| b.name}
+      when 'year' then @breweries.sort_by!{|b| b.year}
+    end
   end
 
   # GET /breweries/1
