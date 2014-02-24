@@ -7,13 +7,14 @@ class BreweriesController < ApplicationController
   # GET /breweries
   # GET /breweries.json
   def index
-    @breweries = Brewery.all
-    order = params[:order] || 'name'
-    #order = 'year'
-    case order
-      when 'name' then @breweries.sort_by!{|b| b.name}
-      when 'year' then @breweries.sort_by!{|b| b.year}
-    end
+    @active_breweries = Brewery.active
+    @retired_breweries = Brewery.retired
+
+#    order = params[:order] || 'name'
+ #   case order
+  #    when 'name' then @breweries.sort_by!{|b| b.name}
+   #   when 'year' then @breweries.sort_by!{|b| b.year}
+    #end
   end
 
   def ngbrew
@@ -81,7 +82,7 @@ class BreweriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def brewery_params
-      params.require(:brewery).permit(:name, :year)
+      params.require(:brewery).permit(:name, :year, :active)
     end
 
 end

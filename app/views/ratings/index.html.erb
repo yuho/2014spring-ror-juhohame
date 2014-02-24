@@ -2,8 +2,20 @@
 
 <p>Number of ratings <%= @ratings.count %></p>
 
+<p>Top3 raterz</p>
 <ul>
-  <% @ratings.each do |rating| %>
+  <% User.top(3).each do |u| %>
+    <li><%= u.username %></li>
+  <% end %>
+</ul>
+</p>
+
+<%= render 'list', title: "beerz", tops: Beer.top(3), count: 3 %>
+<%= render 'list', title: "raterz", tops: User.top(3), count: 3 %>
+<%= render 'list', title: "brewz", tops: Brewery.top(3), count: 3 %>
+
+<ul>
+  <% @ratings.recent5.each do |rating| %>
       <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
   <% end %>
 </ul>

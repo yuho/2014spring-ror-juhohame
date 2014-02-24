@@ -8,13 +8,16 @@ class User < ActiveRecord::Base
                        format: { with: /.*(\d.*[A-Z]|[A-Z].*\d).*/,
                                  message: "should contain a uppercase letter and a number" }
 
-
   has_secure_password
 
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
+
+  def self.top(n)
+    (User.all.sort_by{|u| u.ratings.count}).reverse[0..n-1]
+  end
 
   def favorite_beer
     return nil if ratings.empty?
