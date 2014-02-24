@@ -4,7 +4,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.username, user %></td>
+        <td><%= link_to user.username, user, class:'btn btn-danger' %></td>
         <td></td>
       </tr>
     <% end %>
